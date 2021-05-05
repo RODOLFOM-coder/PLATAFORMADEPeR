@@ -3,6 +3,7 @@ const app = express();
 
 //estou dizendo para o Express usar o ejs como viem engine
 app.set('view engine','ejs');
+app.use(express.static('public')); //pastas aonde ficam os arquivos estaticos.
 
 app.get("/:nome/:lang",(req, res) => {
     var nome = req.params.nome;
