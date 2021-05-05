@@ -5,24 +5,15 @@ const app = express();
 app.set('view engine','ejs');
 app.use(express.static('public')); //pastas aonde ficam os arquivos estaticos.
 
-app.get("/:nome/:lang",(req, res) => {
-    var nome = req.params.nome;
-    var lang = req.params.lang;
-    var exibirmsg = false;
-
-    var produtos = [
-        {nome: "Salgadinho",preco: 3.50},
-        {nome: "Coca-Cola", preco: 5},
-        {nome: "Leite", preco: 1.80}
-    ]
-    res.render("index", {
-        nome: nome,
-        lang: lang,
-        site: "Perguntas e Respostas",
-        msg: exibirmsg,
-        produtos: produtos
-    });
+app.get("/",(req, res) => {
+ 
+    res.render("index");
+ 
 });
+
+app.get("/perguntar",(req,res)=>{
+    res.render("perguntar");
+})
 
 app.listen(8080,()=>{
     console.log("APP RODANDO!!!");
