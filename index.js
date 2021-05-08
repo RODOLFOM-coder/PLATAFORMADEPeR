@@ -1,6 +1,18 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const connection = require("./database/database");
+const perguntaModel = require("./database/Pergunta.js");
+//database 
+
+connection
+    .authenticate()
+    .then(() => {
+        console.log("conexão feita!!!!!!!!");
+})
+.catch((msgErro) => {
+    console.log("msgErro");
+})
 
 //estou dizendo para o Express usar o ejs como viem engine
 app.set('view engine','ejs');
@@ -23,6 +35,6 @@ app.post("/salvarpergunta", (req, res) => {
 res.send("Formulario recebido! titulo " + titulo + " " + "descricao" + descricao);
 });
 
-app.listen(8080,()=>{
+app.listen(8082,()=>{
     console.log("APP RODANDO!!!");
 });
