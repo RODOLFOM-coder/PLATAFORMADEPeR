@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
 app.get("/",(req, res) => {
-    pergunta.findAll({raw: true }).then(pergunta => {
+    pergunta.findAll({raw: true, order:[["id","DESC"]] }).then(pergunta => {
         res.render("index",{
             pergunta: pergunta
         });
@@ -42,6 +42,22 @@ app.post("/salvarpergunta", (req, res) => {
         descricao: descricao
     }).then(() => {
 res.redirect("/");
+    });
+});
+
+app.get("/pergunta/:id",(req,res) => {
+    var id = req.params.id;
+    pergunta.findOne({
+        where: {id: id}
+    }).then(pergunta =>{
+        if(pergunta != undefined){
+            res.render("pergunta", {
+                pergunta: pergunta
+            });
+    }else{
+        res.redirect("/");
+     }
+
     });
 });
 
